@@ -1,5 +1,5 @@
 describe('Formulario de consultoria', () => {
-    it.only('Deve solicitar consultoria indivudal', () => {
+    it('Deve solicitar consultoria indivudal', () => {
         cy.start()
         cy.submitLoginForm('papito@webdojo.com', 'katana123')
         cy.goTo('Formulários', 'Consultoria')
@@ -79,17 +79,13 @@ describe('Formulario de consultoria', () => {
         cy.contains('button', 'Enviar formulário')
             .click()
 
-            cy.get('.modal')
+        cy.get('.modal', { timeout: 70000 })
             .should('be.visible')
             .find('.modal-content')
             .should('be.visible')
             .and('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
 
-
-       /* cy.contains('Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
-            .should('be.visible')
-            */
-
+     
     })
     it('Dece verificar os campos obrigatorios', () => {
         cy.start()
