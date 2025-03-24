@@ -1,6 +1,6 @@
 # 📌 Cypress Test Automation
 
-Este repositório contém testes automatizados utilizando **Cypress** para validar funcionalidades de uma aplicação ChatBot fazendo tracking em entregas dos Correios.
+Este repositório contém testes automatizados utilizando **Cypress** para validar funcionalidades de uma aplicação Web.
 
 ## 🚀 Tecnologias Utilizadas
 - [Cypress](https://www.cypress.io/) - Framework de automação de testes end-to-end
