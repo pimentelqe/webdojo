@@ -1,8 +1,16 @@
 describe('Formulario de consultoria', () => {
-    it('Deve solicitar consultoria indivudal', () => {
+    before(() => {
+        cy.log('Isso acontece antes de todos os testes uma unica vez')
+    })
+    beforeEach(() => {
         cy.start()
         cy.submitLoginForm('papito@webdojo.com', 'katana123')
         cy.goTo('Formulários', 'Consultoria')
+
+    })
+
+    it('Deve solicitar consultoria indivudal', () => {
+
         cy.get('#name').type('Fernando Pimentel')
         cy.get('input[placeholder="Digite seu email"]').type('ferpiolli@gmail.com')
         cy.get('input[placeholder="(00) 00000-0000"]')
@@ -85,16 +93,11 @@ describe('Formulario de consultoria', () => {
             .should('be.visible')
             .and('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
 
-     
+
     })
     it('Dece verificar os campos obrigatorios', () => {
-        cy.start()
-        cy.submitLoginForm('papito@webdojo.com', 'katana123')
-        cy.goTo('Formulários', 'Consultoria')
         cy.contains('button', 'Enviar formulário')
             .click()
-
-
         cy.contains('label', 'Nome Completo')
             .parent()
             .find('p')
@@ -121,6 +124,13 @@ describe('Formulario de consultoria', () => {
 
 
     })
+    afterEach(() => {
+        cy.log('Isso acontece apos cada teste')
+    })
+    after(() => {
+        cy.log('Isso acontece depois de todos os testes uma unica vez')
+    })
+
 })
 
 
