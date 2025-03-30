@@ -3,35 +3,14 @@ describe('Formulario de consultoria', () => {
     beforeEach(() => {
         cy.login()
         cy.goTo('Formulários', 'Consultoria')
+        
+        cy.fixture('consultancy').as('consultancyData')
 
     })
 
-    it('Deve solicitar consultoria indivudal', () => {
-        const consultancyForm = {
-            name: 'Fernando Pimentel',
-            email: 'ferpiolli@gmail.com',
-            phone: '31 99999-1000',
-            consultancyType: 'Individual',
-            personType: 'cpf',
-            document: '02885858010',
-            discoveryChannels: ['Instagram',
-                'LinkedIn',
-                'Udemy',
-                'YouTube',
-                'Indicação de Amigo'],
-            file: './cypress/fixtures/document.pdf',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing eli',
-            techs: [
-                'Cypress',
-                'Selenium',
-                'WebDriveIO',
-                'Playwright',
-                'Robot Framework'
-            ],
-            terms: true
-
-        }
-
+    it('Deve solicitar consultoria indivudal', function(){
+       
+        const consultancyForm = this.consultancyData.personal
 
         cy.get('#name').type(consultancyForm.name)
         cy.get('input[placeholder="Digite seu email"]').type(consultancyForm.email)
@@ -125,24 +104,8 @@ describe('Formulario de consultoria', () => {
 
     })
 
-    it('Deve solicitar consultoria In Company', () => {
-        const consultancyForm = {
-            name: 'Fernando Pimentel',
-            email: 'ferpiolli@gmail.com',
-            phone: '31 99999-1000',
-            consultancyType: 'In Company',
-            personType: 'cnpj',
-            document: '39946868000114',
-            discoveryChannels: ['Instagram',
-                'LinkedIn'],
-            file: './cypress/fixtures/document.pdf',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing eli',
-            techs: [
-                'Cypress'
-            ],
-            terms: true
-
-        }
+    it('Deve solicitar consultoria In Company', function() {
+        const consultancyForm = this.consultancyData.company
         cy.get('#name').type(consultancyForm.name)
         cy.get('input[placeholder="Digite seu email"]').type(consultancyForm.email)
         cy.get('input[placeholder="(00) 00000-0000"]')
@@ -230,7 +193,7 @@ describe('Formulario de consultoria', () => {
 
     })
 
-    it('Dece verificar os campos obrigatorios', () => {
+    it('Deve verificar os campos obrigatorios', () => {
         cy.contains('button', 'Enviar formulário')
             .click()
         cy.contains('label', 'Nome Completo')
