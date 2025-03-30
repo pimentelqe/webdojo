@@ -1,17 +1,24 @@
+import consultancyData from '../fixtures/consultancy.json'
+
 describe('Formulario de consultoria', () => {
 
     beforeEach(() => {
         cy.login()
         cy.goTo('Formulários', 'Consultoria')
-        
-        cy.fixture('consultancy').as('consultancyData')
+
+        /* 
+  Observação: Ao utilizar o fixture com arrow function, ocorre um erro devido ao escopo do `this`. 
+  Para resolver esse problema, é necessário usar a função no formato padrão (`function()`), que preserva o contexto correto.
+  Com isso, a linha abaixo foi comentada, e os dados foram importados diretamente do arquivo JSON (linha 1).
+*/
+        //cy.fixture('consultancy').as('consultancyData')
 
     })
 
-    it('Deve solicitar consultoria indivudal', function(){
-       
-        const consultancyForm = this.consultancyData.personal
+    it('Deve solicitar consultoria indivudal',  ()=> {
 
+        //const consultancyForm = this.consultancyData.personal -- vide comentario acima
+        const consultancyForm = consultancyData.personal
         cy.get('#name').type(consultancyForm.name)
         cy.get('input[placeholder="Digite seu email"]').type(consultancyForm.email)
         cy.get('input[placeholder="(00) 00000-0000"]')
@@ -104,8 +111,9 @@ describe('Formulario de consultoria', () => {
 
     })
 
-    it('Deve solicitar consultoria In Company', function() {
-        const consultancyForm = this.consultancyData.company
+    it('Deve solicitar consultoria In Company', ()=>  {
+        // const consultancyForm = this.consultancyData.company -- vide comentario acima
+        const consultancyForm = consultancyData.company
         cy.get('#name').type(consultancyForm.name)
         cy.get('input[placeholder="Digite seu email"]').type(consultancyForm.email)
         cy.get('input[placeholder="(00) 00000-0000"]')
