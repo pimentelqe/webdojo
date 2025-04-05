@@ -26,6 +26,7 @@
 
 
 import 'cypress-real-events'
+import './actions/consultancy.actios'
 
 Cypress.Commands.add('start', () => {
     cy.viewport(1440, 900)
@@ -54,3 +55,4 @@ Cypress.Commands.add('login', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
 })
+
